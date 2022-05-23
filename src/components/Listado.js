@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useNavigate, Link, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import swAlert from '@sweetalert/with-react';
 
 function Listado() {
 
@@ -11,7 +12,7 @@ function Listado() {
     //     history('/');
     // }
 
-    let token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('token');
 
     const [moviesList, setMoviesList] = useState([]);
 
@@ -21,6 +22,9 @@ function Listado() {
             .then(response => {
                 const apiData = response.data
                 setMoviesList(apiData.results);
+            })
+            .catch(error =>{
+                swAlert(<h2>Hubo errores, intenta mas tarde</h2>);
             })
     }, [setMoviesList]);
 
@@ -40,7 +44,7 @@ function Listado() {
                                     <div className="card-body">
                                         <h5 className="card-title">{oneMovie.title}</h5>
                                         <p className="card-text">{oneMovie.overview.substring(0,100)}...</p>
-                                        <Link to="/" className="btn btn-primary">View detail</Link>
+                                        <Link to={`/detalle?movieID=${oneMovie.id}`} className="btn btn-primary">View detail</Link>
                                     </div>
                                 </div>
                             </div>

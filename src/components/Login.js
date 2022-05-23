@@ -39,13 +39,13 @@ function Login() {
             .then(res => {
                 swAlert(<h2>Perfecto, has ingresado</h2>);
                 const tokenRecibido = res.data.token;
-                localStorage.setItem('token', tokenRecibido);
+                sessionStorage.setItem('token', tokenRecibido);
                 history('/listado');
             })
 
     }
 
-    let token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('token');
 
     return (
         <>

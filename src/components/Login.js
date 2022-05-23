@@ -1,8 +1,13 @@
 import axios from 'axios';
 import swAlert from '@sweetalert/with-react';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 
-function Login () {
+function Login() {
+
+    const history = useNavigate();
+    // console.log(history)
+
     const submitHandler = e => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -35,28 +40,35 @@ function Login () {
                 swAlert(<h2>Perfecto, has ingresado</h2>);
                 const tokenRecibido = res.data.token;
                 localStorage.setItem('token', tokenRecibido);
+                history('/listado');
             })
 
     }
 
-
+    let token = localStorage.getItem('token');
 
     return (
         <>
-            <h2>Formulario de login</h2>
-            <form onSubmit={submitHandler}>
-                <label>
-                    <span>Correo electronico:</span> <br />
-                    <input type="text" name="email"></input>
-                </label>
-                <br />
-                <label>
-                    <span>Contrasena:</span> <br />
-                    <input type="password" name="password"></input>
-                </label>
-                <br />
-                <button type="submit">Ingresar</button>
-            </form>
+            {token && <Navigate to='/listado' />}
+
+            <div className='row'>
+                <div className='col-6 offset-3'>
+                    <h2>Formulario de login</h2>
+                    <form onSubmit={submitHandler}>
+                        <label class="form-label d-block mt-2">
+                            <span>Correo electronico:</span> <br />
+                            <input class="form-control" type="text" name="email"></input>
+                        </label>
+
+                        <label class="form-label d-block mt-2">
+                            <span>Contrasena:</span> <br />
+                            <input class="form-control" type="password" name="password"></input>
+                        </label>
+                        <button type="submit" class="btn btn-outline-success">Ingresar</button>
+                        
+                    </form>
+                </div>
+            </div>
         </>
     )
 }

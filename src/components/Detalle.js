@@ -9,6 +9,8 @@ function Detalle() {
     let query = new URLSearchParams(window.location.search);
     let movieID = query.get('movieID');
 
+    console.log(movieID);
+
     const [movie, setMovie] = useState(null);
 
 

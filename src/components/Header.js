@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Buscador from './Buscador';
 
 
-function Header() {
+function Header(props) {
     return (
         <header>
             <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
@@ -15,15 +15,23 @@ function Header() {
                     </button>
                     <div className='collapse navbar-collapse' id='navbarNav'>
                         <ul className='navbar-nav'>
-                            <li className='navbar-item'>
+                            <li className='nav-item'>
                                 <Link className='nav-link' to='/'>Home</Link>
                             </li>
-                            <li className='navbar-item'>
+                            <li className='nav-item'>
                                 <Link className='nav-link' to='/listado'>Listado</Link>
+                            </li>
+                            <li className='nav-item'>
+                                <Link className='nav-link' to='/favoritos'>Favoritos</Link>
+                            </li>
+                            <li className="nav-item d-flex align-items-center">
+                                <span className='text-success'>
+                                    {props.favorites.length > 0 && <> Peliculas en Favoritos: {props.favorites.length}</>}
+                                </span>
                             </li>
                         </ul>
                     </div>
-                    <Buscador/>
+                    <Buscador />
                 </div>
             </nav>
         </header>
